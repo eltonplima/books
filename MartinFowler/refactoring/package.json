@@ -5,9 +5,13 @@
   "main": "main.js",
   "scripts": {
     "run": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
-  "license": ""
+  "license": "",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2"
+  }
 }
