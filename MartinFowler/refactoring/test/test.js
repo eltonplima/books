@@ -59,13 +59,13 @@ describe('Verify bill report', () => {
                 "performances": [
                     {
                         "playID": "hamlet",
-                        "audience": 10
+                        "audience": 29
                     }
                 ]
             }
             const value = statement(invoices, plays);
             expect(value).to.equal("Statement for BigCo\n" +
-                "  Hamlet: $400.00(10 seats)\n" +
+                "  Hamlet: $400.00(29 seats)\n" +
                 "Amount owed is $400.00\n" +
                 "You earned 0 credits\n");
         });
@@ -91,15 +91,15 @@ describe('Verify bill report', () => {
                 "performances": [
                     {
                         "playID": "as-like",
-                        "audience": 10
+                        "audience": 19
                     }
                 ]
             }
             const value = statement(invoices, plays);
             expect(value).to.equal("Statement for BigCo\n" +
-                "  As You Like It: $330.00(10 seats)\n" +
-                "Amount owed is $330.00\n" +
-                "You earned 2 credits\n");
+                "  As You Like It: $357.00(19 seats)\n" +
+                "Amount owed is $357.00\n" +
+                "You earned 3 credits\n");
         });
     });
 })
