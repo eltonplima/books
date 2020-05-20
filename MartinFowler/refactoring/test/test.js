@@ -24,8 +24,8 @@ describe('Verify bill report', () => {
             },
         }
     });
-    describe('When invoice has', () => {
-        it('one unknown performance with audience of 100', function () {
+    describe('When invoice has unknown performance', () => {
+        it('with audience of 100', function () {
             const invoices = {
                 "customer": "BigCo",
                 "performances": [
@@ -37,7 +37,9 @@ describe('Verify bill report', () => {
             }
             expect(() => statement(invoices, plays)).to.throw(Error, "unknown type: horror");
         });
-        it('one tragedy performance with audience greater than 30', function () {
+    });
+    describe('When invoice has one tragedy performance', () => {
+        it('with audience greater than 30', function () {
             const invoices = {
                 "customer": "BigCo",
                 "performances": [
@@ -53,7 +55,7 @@ describe('Verify bill report', () => {
                 "Amount owed is $650.00\n" +
                 "You earned 25 credits\n");
         });
-        it('one tragedy performance with audience less than 30', function () {
+        it('with audience less than 30', function () {
             const invoices = {
                 "customer": "BigCo",
                 "performances": [
@@ -69,7 +71,7 @@ describe('Verify bill report', () => {
                 "Amount owed is $400.00\n" +
                 "You earned 0 credits\n");
         });
-        it('one tragedy performance with audience equals 30', function () {
+        it('with audience equals 30', function () {
             const invoices = {
                 "customer": "BigCo",
                 "performances": [
@@ -85,7 +87,9 @@ describe('Verify bill report', () => {
                 "Amount owed is $400.00\n" +
                 "You earned 0 credits\n");
         });
-        it('one comedy performance with audience greater than 20', function () {
+    });
+    describe('When invoice has one comedy performance', () => {
+        it('with audience greater than 20', function () {
             const invoices = {
                 "customer": "BigCo",
                 "performances": [
@@ -101,7 +105,7 @@ describe('Verify bill report', () => {
                 "Amount owed is $740.00\n" +
                 "You earned 36 credits\n");
         });
-        it('one comedy performance with audience less than 20', function () {
+        it('with audience less than 20', function () {
             const invoices = {
                 "customer": "BigCo",
                 "performances": [
@@ -117,7 +121,7 @@ describe('Verify bill report', () => {
                 "Amount owed is $357.00\n" +
                 "You earned 3 credits\n");
         });
-        it('one comedy performance with audience equals 20', function () {
+        it('with audience equals 20', function () {
             const invoices = {
                 "customer": "BigCo",
                 "performances": [
