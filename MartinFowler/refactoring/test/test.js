@@ -117,5 +117,21 @@ describe('Verify bill report', () => {
                 "Amount owed is $357.00\n" +
                 "You earned 3 credits\n");
         });
+        it('one comedy performance with audience equals 20', function () {
+            const invoices = {
+                "customer": "BigCo",
+                "performances": [
+                    {
+                        "playID": "as-like",
+                        "audience": 20
+                    }
+                ]
+            }
+            const value = statement(invoices, plays);
+            expect(value).to.equal("Statement for BigCo\n" +
+                "  As You Like It: $360.00(20 seats)\n" +
+                "Amount owed is $360.00\n" +
+                "You earned 4 credits\n");
+        });
     });
 })
