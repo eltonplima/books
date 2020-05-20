@@ -69,6 +69,22 @@ describe('Verify bill report', () => {
                 "Amount owed is $400.00\n" +
                 "You earned 0 credits\n");
         });
+        it('one tragedy performance with audience equals 30', function () {
+            const invoices = {
+                "customer": "BigCo",
+                "performances": [
+                    {
+                        "playID": "hamlet",
+                        "audience": 30
+                    }
+                ]
+            }
+            const value = statement(invoices, plays);
+            expect(value).to.equal("Statement for BigCo\n" +
+                "  Hamlet: $400.00(30 seats)\n" +
+                "Amount owed is $400.00\n" +
+                "You earned 0 credits\n");
+        });
         it('one comedy performance with audience greater than 20', function () {
             const invoices = {
                 "customer": "BigCo",
