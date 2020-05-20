@@ -6,8 +6,7 @@ module.exports = function statement(invoice, plays) {
         style: "currency", currency: "USD", minimumFractionDigits: 2
     }).format;
 
-    for (let perf of invoice.performances) {
-        const play = plays[perf.playID];
+    function amountFor(perf, play) {
         let thisAmount = 0;
 
         switch (play.type) {
@@ -27,6 +26,13 @@ module.exports = function statement(invoice, plays) {
             default:
                 throw new Error(`unknown type: ${play.type}`);
         }
+
+        return thisAmount;
+    }
+
+    for (let perf of invoice.performances) {
+        const play = plays[perf.playID];
+        let thisAmount = amountFor(perf, play);
 
         // add volume credits
         volumeCredits += Math.max(perf.audience - 30, 0);
