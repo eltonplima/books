@@ -59,7 +59,7 @@ loop(S = #state{}) ->
     shutdown ->
       exit(shutdown);
     {'DOWN', Ref, process, _Pid, _Reason} ->
-      pass;
+      loop(S#state{clients = orddict:erase(Ref, S#state.clients)});
     code_change ->
       pass;
     Unknown ->
