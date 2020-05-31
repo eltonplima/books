@@ -57,7 +57,7 @@ loop(S = #state{}) ->
           loop(S)
       end;
     shutdown ->
-      pass;
+      exit(shutdown);
     {'DOWN', Ref, process, _Pid, _Reason} ->
       pass;
     code_change ->
