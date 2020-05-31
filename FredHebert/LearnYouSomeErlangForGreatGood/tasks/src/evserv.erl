@@ -61,7 +61,7 @@ loop(S = #state{}) ->
     {'DOWN', Ref, process, _Pid, _Reason} ->
       loop(S#state{clients = orddict:erase(Ref, S#state.clients)});
     code_change ->
-      pass;
+      ?MODULE:loop(S);
     Unknown ->
       io:format("Unknown message ~p~n", [Unknown]),
       loop(State)
