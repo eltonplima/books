@@ -70,6 +70,10 @@ loop(S = #state{}) ->
 init() ->
   loop(#state{events=orddict:new(), clients=orddict:new()}).
 
+start() ->
+  register(?MODULE, Pid=spawn(?MODULE, init, [])),
+  Pid.
+
 valid_datetime({Date, Time}) ->
   try
     calendar:valid_date(Date) andalso valid_time(Time)
