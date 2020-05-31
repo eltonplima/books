@@ -64,7 +64,7 @@ loop(S = #state{}) ->
       ?MODULE:loop(S);
     Unknown ->
       io:format("Unknown message ~p~n", [Unknown]),
-      loop(State)
+      loop(S)
   end.
 
 init() ->
@@ -79,7 +79,7 @@ valid_datetime({Date, Time}) ->
       false
   end;
 
-valid_datetime(_) -> false;
+valid_datetime(_) -> false.
 
 valid_time({H,M,S}) -> valid_time(H,M,S).
 valid_time(H,M,S) when H >= 0, H < 24,
