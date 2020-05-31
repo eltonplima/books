@@ -121,3 +121,12 @@ add_event(Name, Description, TimeOut) ->
   after 5000 ->
     {error, timeout}
   end.
+
+cancel(Name) ->
+  Ref = make_ref(),
+  ?MODULE ! {self(), Ref, {cancel, Name}},
+  receive
+    {Ref, ok} -> ok
+  after 5000 ->
+    {error, timeout}
+  end.
