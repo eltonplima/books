@@ -47,7 +47,15 @@ loop(S = #state{}) ->
       Pid ! {MsgRef,ok},
       loop(S#state{events=Events});
     {done, Name} ->
-      pass;
+      case orddict:find(Name,S#state.events) of
+        {ok, E} ->
+          send_to_clients({done, E#event.name, E#event.description}, S#state.clients),
+          NewEvents = orddict:erase(Name, S#state.events),
+          loop(S#state{events = NewEvents});
+        error ->
+          %% This may happen if we cancel an event and it fires at the time.
+          loop(S)
+      end;
     shutdown ->
       pass;
     {'DOWN', Ref, process, _Pid, _Reason} ->
@@ -78,3 +86,6 @@ valid_time(H,M,S) when H >= 0, H < 24,
   M >= 0, M < 60,
   S >= 0, S < 60 -> true;
 valid_time(_, _, _) -> false.
+
+send_to_clients(Msg, ClientDict) ->
+  orddict:map(fun(_Ref, Pid) -> Pid ! Msg end, ClientDict).
