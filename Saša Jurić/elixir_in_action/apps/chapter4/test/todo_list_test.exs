@@ -84,4 +84,21 @@ defmodule Chapter4.TodoList.TodoListTest do
       end)
     end
   end
+
+  test "delete an entry when the todo list has only one item" do
+    todo_list =
+      TodoList.new()
+      |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
+
+    assert %TodoList{auto_id: 2, entries: %{}} == TodoList.delete_entry(todo_list, 1)
+  end
+
+  test "delete an entry when the todo list has many items" do
+    todo_list =
+      TodoList.new()
+      |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
+      |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-02], title: "Test 2"})
+
+    assert %TodoList{auto_id: 3, entries: %{2 => %TodoEntry{id: 2, date: ~D[2021-01-02], title: "Test 2"}}} == TodoList.delete_entry(todo_list, 1)
+  end
 end
