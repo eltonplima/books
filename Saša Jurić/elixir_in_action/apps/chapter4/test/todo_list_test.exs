@@ -10,7 +10,7 @@ defmodule Chapter4.TodoList.TodoListTest do
       TodoList.new()
       |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
 
-    assert ^todo_list = %TodoList{
+    assert todo_list == %TodoList{
              auto_id: 2,
              entries: %{
                1 => %TodoEntry{id: 1, date: ~D[2021-01-01], title: "Test 1"}
@@ -99,6 +99,9 @@ defmodule Chapter4.TodoList.TodoListTest do
       |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
       |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-02], title: "Test 2"})
 
-    assert %TodoList{auto_id: 3, entries: %{2 => %TodoEntry{id: 2, date: ~D[2021-01-02], title: "Test 2"}}} == TodoList.delete_entry(todo_list, 1)
+    assert %TodoList{
+             auto_id: 3,
+             entries: %{2 => %TodoEntry{id: 2, date: ~D[2021-01-02], title: "Test 2"}}
+           } == TodoList.delete_entry(todo_list, 1)
   end
 end
