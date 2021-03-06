@@ -1,4 +1,5 @@
 defmodule Chapter4.TodoList.TodoList do
+  @behavior Access
   defstruct auto_id: 1, entries: %{}
   alias Chapter4.TodoList.TodoEntry
 
@@ -10,8 +11,10 @@ defmodule Chapter4.TodoList.TodoList do
 
   def add_entry(todo_list, %TodoEntry{} = entry) do
     entry = %TodoEntry{entry | id: todo_list.auto_id}
-    new_entries = Map.put(todo_list.entries, todo_list.auto_id, entry)
-    %__MODULE__{todo_list | entries: new_entries, auto_id: todo_list.auto_id + 1}
+    path = [:entries, todo_list.auto_id]
+    new_entries = put_in(todo_list, path, entry)
+
+    %__MODULE__{new_entries | auto_id: todo_list.auto_id + 1}
   end
 
   def entries(todo_list, date) do
@@ -41,4 +44,13 @@ defmodule Chapter4.TodoList.TodoList do
     new_entries = Map.delete(todo_list.entries, entry_id)
     %__MODULE__{todo_list | entries: new_entries}
   end
+
+  def get_and_update(data, key, function) do
+    Map.get_and_update(data, key, function)
+  end
 end
+
+# defimpl Access, for: Chapter4.TodoList.TodoList do
+#  def get_and_update(data, key, fun) do
+#  end
+# end
