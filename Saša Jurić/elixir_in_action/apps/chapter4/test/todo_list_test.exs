@@ -1,4 +1,4 @@
-defmodule Chapter4.TodoList.TodoListTest do
+defmodule Chapter4.TodoList.TodoList.AddEntryTest do
   use ExUnit.Case
   alias Chapter4.TodoList.TodoList
   alias Chapter4.TodoList.TodoEntry
@@ -18,12 +18,6 @@ defmodule Chapter4.TodoList.TodoListTest do
            }
   end
 
-  test "add_entry with invalid todo_list type raises FunctionClauseError" do
-    assert_raise FunctionClauseError, fn ->
-      TodoList.add_entry(%{}, %TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
-    end
-  end
-
   test "add more than one entry in sequence" do
     todo_list =
       TodoList.new()
@@ -38,6 +32,18 @@ defmodule Chapter4.TodoList.TodoListTest do
              }
            }
   end
+
+  test "add_entry with invalid todo_list type raises FunctionClauseError" do
+    assert_raise FunctionClauseError, fn ->
+      TodoList.add_entry(%{}, %TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
+    end
+  end
+end
+
+defmodule Chapter4.TodoList.TodoList.EntriesTest do
+  use ExUnit.Case
+  alias Chapter4.TodoList.TodoList
+  alias Chapter4.TodoList.TodoEntry
 
   test "find many entries on the same date" do
     todo_list =
@@ -63,6 +69,12 @@ defmodule Chapter4.TodoList.TodoListTest do
              %TodoEntry{id: 1, date: ~D[2021-01-01], title: "Test 1"}
            ]
   end
+end
+
+defmodule Chapter4.TodoList.TodoList.UpdateEntryTest do
+  use ExUnit.Case
+  alias Chapter4.TodoList.TodoList
+  alias Chapter4.TodoList.TodoEntry
 
   test "update an existing entry" do
     todo_list =
@@ -90,6 +102,12 @@ defmodule Chapter4.TodoList.TodoListTest do
       end)
     end
   end
+end
+
+defmodule Chapter4.TodoList.TodoList.DeleteEntryTest do
+  use ExUnit.Case
+  alias Chapter4.TodoList.TodoList
+  alias Chapter4.TodoList.TodoEntry
 
   test "delete an entry when the todo list has only one item" do
     todo_list =
