@@ -1,4 +1,4 @@
-defmodule Range do
+defmodule Chapter3.Range do
   def range(start, stop) when start > stop do
     do_range([], stop, start)
   end
