@@ -5,7 +5,7 @@ defmodule Chapter4.TodoList.TodoListTest do
 
   doctest Chapter4.TodoList.TodoList
 
-  test "add single entry" do
+  test "add the first entry with add_entry function" do
     todo_list =
       TodoList.new()
       |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
@@ -18,7 +18,13 @@ defmodule Chapter4.TodoList.TodoListTest do
            }
   end
 
-  test "add many entries" do
+  test "add_entry with invalid todo_list type raises FunctionClauseError" do
+    assert_raise FunctionClauseError, fn ->
+      TodoList.add_entry(%{}, %TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
+    end
+  end
+
+  test "add more than one entry in sequence" do
     todo_list =
       TodoList.new()
       |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
