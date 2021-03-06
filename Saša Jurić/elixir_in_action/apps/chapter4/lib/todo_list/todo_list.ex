@@ -9,7 +9,7 @@ defmodule Chapter4.TodoList.TodoList do
   """
   def new(), do: %__MODULE__{}
 
-  def add_entry(todo_list, %TodoEntry{} = entry) do
+  def add_entry(%__MODULE__{} = todo_list, %TodoEntry{} = entry) do
     entry = %TodoEntry{entry | id: todo_list.auto_id}
     path = [:entries, todo_list.auto_id]
     new_entries = put_in(todo_list, path, entry)
