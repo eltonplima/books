@@ -129,3 +129,26 @@ defmodule Chapter4.TodoList.TodoList.DeleteEntryTest do
            } == TodoList.delete_entry(todo_list, 1)
   end
 end
+
+defmodule Chapter4.TodoList.TodoList.NewTest do
+  use ExUnit.Case
+  alias Chapter4.TodoList.TodoList
+  alias Chapter4.TodoList.TodoEntry
+
+  test "create a new todo list based on a raw list of TODOs" do
+    raw_todo_list = [
+      %{date: ~D[2021-03-06], title: "Dentist"},
+      %{date: ~D[2021-03-07], title: "Shopping"},
+      %{date: ~D[2021-03-08], title: "Movies"}
+    ]
+
+    assert TodoList.new(raw_todo_list) == %TodoList{
+             auto_id: 4,
+             entries: %{
+               3 => %TodoEntry{id: 3, date: ~D[2021-03-08], title: "Movies"},
+               2 => %TodoEntry{id: 2, date: ~D[2021-03-07], title: "Shopping"},
+               1 => %TodoEntry{id: 1, date: ~D[2021-03-06], title: "Dentist"}
+             }
+           }
+  end
+end

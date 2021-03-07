@@ -9,6 +9,13 @@ defmodule Chapter4.TodoList.TodoList do
   """
   def new(), do: %__MODULE__{}
 
+  def new(entries \\ []) do
+    Enum.reduce(entries, new(), fn %{date: date, title: title}, todo_list_acc ->
+      entry = %TodoEntry{date: date, title: title}
+      add_entry(todo_list_acc, entry)
+    end)
+  end
+
   def add_entry(%__MODULE__{} = todo_list, %TodoEntry{} = entry) do
     entry = %TodoEntry{entry | id: todo_list.auto_id}
     path = [:entries, todo_list.auto_id]
