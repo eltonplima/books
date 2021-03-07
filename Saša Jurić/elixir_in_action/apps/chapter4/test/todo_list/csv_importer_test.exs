@@ -14,20 +14,58 @@ defmodule Chapter4.TodoList.CsvImporterTest do
   end
 
   setup_all do
-    csv_content = " 2021/03/06,Dentist   \n"
-    csv_file_path = "test/single.csv"
-    File.write!(csv_file_path, csv_content, [:write, {:encoding, :utf8}])
-    on_exit(fn -> File.rm!(csv_file_path) end)
-    {:ok, single_entry_csv_file_path: csv_file_path}
+    single_line_csv_file_path = "test/single_line.csv"
+    multi_line_csv_file_path = "test/multi_line.csv"
+
+    File.write!(
+      single_line_csv_file_path,
+      " 2021/03/06,Dentist   \n",
+      [
+        :write,
+        {:encoding, :utf8}
+      ]
+    )
+
+    File.write!(
+      multi_line_csv_file_path,
+      " 2021/03/06,Dentist\n2021/03/07,Shopping\n2021/03/08,Movies\n",
+      [
+        :write,
+        {:encoding, :utf8}
+      ]
+    )
+
+    on_exit(fn ->
+      File.rm!(single_line_csv_file_path)
+      File.rm!(multi_line_csv_file_path)
+    end)
+
+    {:ok,
+     single_line_csv_file_path: single_line_csv_file_path,
+     multi_line_csv_file_path: multi_line_csv_file_path}
   end
 
   test "create a TodoList from imported from CSV file with single entry", state do
-    csv_file_path = state[:single_entry_csv_file_path]
-    todo_list = CsvImporter.import(csv_file_path)
+    single_line_csv_file_path = state[:single_line_csv_file_path]
+    todo_list = CsvImporter.import(single_line_csv_file_path)
 
     assert todo_list == %TodoList{
              auto_id: 2,
              entries: %{
+               1 => %TodoEntry{id: 1, date: ~D[2021-03-06], title: "Dentist"}
+             }
+           }
+  end
+
+  test "create a TodoList from imported from CSV file with many entry", state do
+    multi_line_csv_file_path = state[:multi_line_csv_file_path]
+    todo_list = CsvImporter.import(multi_line_csv_file_path)
+
+    assert todo_list == %TodoList{
+             auto_id: 4,
+             entries: %{
+               3 => %TodoEntry{id: 3, date: ~D[2021-03-08], title: "Movies"},
+               2 => %TodoEntry{id: 2, date: ~D[2021-03-07], title: "Shopping"},
                1 => %TodoEntry{id: 1, date: ~D[2021-03-06], title: "Dentist"}
              }
            }

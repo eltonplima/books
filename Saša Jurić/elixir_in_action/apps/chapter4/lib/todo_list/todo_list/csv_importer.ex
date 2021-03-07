@@ -16,6 +16,7 @@ defmodule Chapter4.TodoList.CsvImporter do
     |> Stream.map(&parse_fields(&1))
     |> Stream.map(&IO.inspect(&1, label: "parse_fields"))
     |> Enum.reduce([], fn entry, acc -> [entry | acc] end)
+    |> Enum.reverse()
   end
 
   defp sanitize(line) do
