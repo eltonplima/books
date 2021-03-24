@@ -1,6 +1,5 @@
 defmodule Chapter4.TodoList.TodoList.AddEntryTest do
   use ExUnit.Case
-  import ExUnit.CaptureIO
 
   alias Chapter4.TodoList.TodoList
   alias Chapter4.TodoList.TodoEntry
@@ -39,10 +38,6 @@ defmodule Chapter4.TodoList.TodoList.AddEntryTest do
     assert_raise FunctionClauseError, fn ->
       TodoList.add_entry(%{}, %TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
     end
-  end
-
-  test "TodoList implements String.Chars protocol" do
-    assert capture_io(fn -> IO.puts(TodoList.new()) end) == "#TodoList\n"
   end
 end
 
@@ -156,5 +151,32 @@ defmodule Chapter4.TodoList.TodoList.NewTest do
                1 => %TodoEntry{id: 1, date: ~D[2021-03-06], title: "Dentist"}
              }
            }
+  end
+end
+
+defmodule Chapter4.TodoList.TodoList.ProtocolsImplementedTest do
+  use ExUnit.Case
+  alias Chapter4.TodoList.TodoList
+  alias Chapter4.TodoList.TodoEntry
+  import ExUnit.CaptureIO
+
+  test "TodoList implements String.Chars protocol" do
+    assert capture_io(fn -> IO.puts(TodoList.new()) end) == "#TodoList\n"
+  end
+
+  test "TodoList implements Collectable protocol" do
+    expected =
+      TodoList.new()
+      |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
+      |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-02], title: "Test 2"})
+      |> TodoList.add_entry(%TodoEntry{date: ~D[2021-01-03], title: "Test 3"})
+
+    entries = [
+      %{date: ~D[2021-01-01], title: "Test 1"},
+      %{date: ~D[2021-01-02], title: "Test 2"},
+      %{date: ~D[2021-01-03], title: "Test 3"}
+    ]
+
+    assert expected == for(entry <- entries, into: TodoList.new(), do: entry)
   end
 end

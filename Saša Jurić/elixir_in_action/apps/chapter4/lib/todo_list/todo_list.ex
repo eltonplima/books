@@ -1,5 +1,5 @@
 defmodule Chapter4.TodoList.TodoList do
-  @behavior Access
+  @behaviour Access
   defstruct auto_id: 1, entries: %{}
   alias Chapter4.TodoList.TodoEntry
 
@@ -9,13 +9,27 @@ defmodule Chapter4.TodoList.TodoList do
     end
   end
 
+  defimpl Collectable, for: __MODULE__ do
+    def into(original) do
+      {original, &into_callback/2}
+    end
+
+    defp into_callback(todo_list, {:cont, entry}) do
+      new_entry = TodoEntry.new(entry)
+      Chapter4.TodoList.TodoList.add_entry(todo_list, new_entry)
+    end
+
+    defp into_callback(todo_list, :done), do: todo_list
+    defp into_callback(_todo_list, :halt), do: :ok
+  end
+
   @doc """
     iex> Chapter4.TodoList.TodoList.new()
     %Chapter4.TodoList.TodoList{auto_id: 1, entries: %{}}
   """
   def new(), do: %__MODULE__{}
 
-  def new(entries \\ []) do
+  def new(entries) do
     Enum.reduce(entries, new(), fn %{date: date, title: title}, todo_list_acc ->
       entry = %TodoEntry{date: date, title: title}
       add_entry(todo_list_acc, entry)
