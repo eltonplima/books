@@ -1,5 +1,7 @@
 defmodule Chapter4.TodoList.TodoList.AddEntryTest do
   use ExUnit.Case
+  import ExUnit.CaptureIO
+
   alias Chapter4.TodoList.TodoList
   alias Chapter4.TodoList.TodoEntry
 
@@ -37,6 +39,10 @@ defmodule Chapter4.TodoList.TodoList.AddEntryTest do
     assert_raise FunctionClauseError, fn ->
       TodoList.add_entry(%{}, %TodoEntry{date: ~D[2021-01-01], title: "Test 1"})
     end
+  end
+
+  test "TodoList implements String.Chars protocol" do
+    assert capture_io(fn -> IO.puts(TodoList.new()) end) == "#TodoList\n"
   end
 end
 

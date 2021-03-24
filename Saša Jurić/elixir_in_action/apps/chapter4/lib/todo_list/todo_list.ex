@@ -3,6 +3,12 @@ defmodule Chapter4.TodoList.TodoList do
   defstruct auto_id: 1, entries: %{}
   alias Chapter4.TodoList.TodoEntry
 
+  defimpl String.Chars, for: __MODULE__ do
+    def to_string(_) do
+      "#TodoList"
+    end
+  end
+
   @doc """
     iex> Chapter4.TodoList.TodoList.new()
     %Chapter4.TodoList.TodoList{auto_id: 1, entries: %{}}
