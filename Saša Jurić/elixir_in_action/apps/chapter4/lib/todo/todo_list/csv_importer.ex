@@ -1,7 +1,7 @@
-defmodule Chapter4.TodoList.CsvImporter do
+defmodule Chapter4.Todo.CsvImporter do
   @moduledoc false
 
-  alias Chapter4.TodoList.TodoList
+  alias Chapter4.Todo.TodoList
 
   def import(csv_file_path) do
     csv_file_path

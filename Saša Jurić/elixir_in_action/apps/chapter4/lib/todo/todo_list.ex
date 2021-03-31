@@ -1,7 +1,7 @@
-defmodule Chapter4.TodoList.TodoList do
+defmodule Chapter4.Todo.TodoList do
   @behaviour Access
   defstruct auto_id: 1, entries: %{}
-  alias Chapter4.TodoList.TodoEntry
+  alias Chapter4.Todo.TodoEntry
 
   defimpl String.Chars, for: __MODULE__ do
     def to_string(_) do
@@ -16,7 +16,7 @@ defmodule Chapter4.TodoList.TodoList do
 
     defp into_callback(todo_list, {:cont, entry}) do
       new_entry = TodoEntry.new(entry)
-      Chapter4.TodoList.TodoList.add_entry(todo_list, new_entry)
+      Chapter4.Todo.TodoList.add_entry(todo_list, new_entry)
     end
 
     defp into_callback(todo_list, :done), do: todo_list
@@ -24,8 +24,8 @@ defmodule Chapter4.TodoList.TodoList do
   end
 
   @doc """
-    iex> Chapter4.TodoList.TodoList.new()
-    %Chapter4.TodoList.TodoList{auto_id: 1, entries: %{}}
+    iex> Chapter4.Todo.TodoList.new()
+    %Chapter4.Todo.TodoList{auto_id: 1, entries: %{}}
   """
   def new(), do: %__MODULE__{}
 
@@ -77,7 +77,7 @@ defmodule Chapter4.TodoList.TodoList do
   end
 end
 
-# defimpl Access, for: Chapter4.TodoList.TodoList do
+# defimpl Access, for: Chapter4.Todo.TodoList do
 #  def get_and_update(data, key, fun) do
 #  end
 # end

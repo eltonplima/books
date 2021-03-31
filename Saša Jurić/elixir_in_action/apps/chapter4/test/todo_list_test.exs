@@ -1,11 +1,11 @@
-defmodule Chapter4.TodoList.TodoListTest do
+defmodule Chapter4.Todo.TodoListTest do
   use ExUnit.Case, async: true
   import ExUnit.CaptureIO
 
-  alias Chapter4.TodoList.TodoList
-  alias Chapter4.TodoList.TodoEntry
+  alias Chapter4.Todo.TodoList
+  alias Chapter4.Todo.TodoEntry
 
-  doctest Chapter4.TodoList.TodoList
+  doctest Chapter4.Todo.TodoList
 
   defmodule AddEntryTest do
     use ExUnit.Case, async: true

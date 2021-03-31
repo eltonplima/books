@@ -1,4 +1,4 @@
-defmodule Chapter4.TodoList.TodoEntry do
+defmodule Chapter4.Todo.TodoEntry do
   @moduledoc false
   defstruct id: nil, date: nil, title: nil
 

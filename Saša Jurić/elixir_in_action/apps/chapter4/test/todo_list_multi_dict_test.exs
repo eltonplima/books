@@ -1,5 +1,5 @@
-defmodule Chapter4.TodoList.MultiDictTest do
+defmodule Chapter4.Todo.MultiDictTest do
   use ExUnit.Case
 
-  doctest Chapter4.TodoList.MultiDict
+  doctest Chapter4.Todo.MultiDict
 end

@@ -1,9 +1,9 @@
-defmodule Chapter4.TodoList.CsvImporterTest do
+defmodule Chapter4.Todo.CsvImporterTest do
   use ExUnit.Case
 
-  alias Chapter4.TodoList.CsvImporter
-  alias Chapter4.TodoList.TodoEntry
-  alias Chapter4.TodoList.TodoList
+  alias Chapter4.Todo.CsvImporter
+  alias Chapter4.Todo.TodoEntry
+  alias Chapter4.Todo.TodoList
 
   @moduletag :capture_log
 

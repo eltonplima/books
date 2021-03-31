@@ -1,7 +1,7 @@
-defmodule Chapter4.TodoList.TodoEntryTest do
+defmodule Chapter4.Todo.TodoEntryTest do
   use ExUnit.Case
 
-  alias Chapter4.TodoList.TodoEntry
+  alias Chapter4.Todo.TodoEntry
 
   @moduletag :capture_log
 
