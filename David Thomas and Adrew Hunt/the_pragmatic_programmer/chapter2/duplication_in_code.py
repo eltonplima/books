@@ -11,15 +11,16 @@ class Account(BaseModel):
         return self.credits - self.debits
 
 
+def format_amount(value: int) -> str:
+    result = f"{value}"
+    if value < 0:
+        return result + "-"
+    return result
+
+
 def print_balance(account):
-    print(f"Debits: {account.debits}")
-    print(f"Credits: {account.credits}")
-    if account.fees < 0:
-        print(f"Fees: {account.fees}-")
-    else:
-        print(f"Fees: {account.fees}")
+    print(f"Debits: {format_amount(account.debits)}")
+    print(f"Credits: {format_amount(account.credits)}")
+    print(f"Fees: {format_amount(account.fees)}")
     print("-" * 80)
-    if account.balance < 0:
-        print(f"Balance: {account.balance}-")
-    else:
-        print(f"Balance: {account.balance}")
+    print(f"Balance: {format_amount(account.balance)}")
