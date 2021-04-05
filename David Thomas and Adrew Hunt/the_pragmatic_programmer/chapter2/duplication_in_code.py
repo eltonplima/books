@@ -18,9 +18,17 @@ def format_amount(value: int) -> str:
     return result
 
 
+def print_line(label: str, value: str):
+    print(f"{label} {value}")
+
+
+def report_line(label: str, amount: int):
+    print_line(label + ":", format_amount(amount))
+
+
 def print_balance(account):
-    print(f"Debits: {format_amount(account.debits)}")
-    print(f"Credits: {format_amount(account.credits)}")
-    print(f"Fees: {format_amount(account.fees)}")
+    report_line("Debits", account.debits)
+    report_line("Credits", account.credits)
+    report_line("Fees", account.fees)
     print("-" * 80)
-    print(f"Balance: {format_amount(account.balance)}")
+    report_line("Balance", account.balance)
