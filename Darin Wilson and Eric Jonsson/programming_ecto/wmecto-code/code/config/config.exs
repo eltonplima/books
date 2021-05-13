@@ -36,6 +36,7 @@ config :music_db, MusicDB.Repo,
   #  password: "postgres",
   #  database: "music_db",
   #  hostname: "localhost",
+  # You can override this with envvar DATABASE_URL. See details in MusicDB.Repo
   url: "postgres://postgres:postgres@localhost/music_db",
   # this is not normally needed - we put it here to support an example of
   migration_lock: nil
