@@ -1,11 +1,11 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/wmecto for more book information.
-#---
+# ---
 defmodule IntervalExtension do
   @behaviour Postgrex.Extension
 
@@ -25,7 +25,7 @@ defmodule IntervalExtension do
 
   def decode(_state) do
     quote do
-      <<16::32, microseconds::64, days :: int32, months :: int32>> ->
+      <<16::32, microseconds::64, days::int32, months::int32>> ->
         seconds = div(microseconds, 1_000_000)
         {months, days, seconds}
     end
@@ -43,5 +43,3 @@ config :my_app, MyApp.Repo,
   types: MyApp.PostgrexTypes,
   #...
 """
-
-

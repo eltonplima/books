@@ -1,18 +1,18 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/wmecto for more book information.
-#---
+# ---
 defmodule MyApp.Address do
   import Ecto.Changeset
   use Ecto.Schema
 
   embedded_schema do
-    field :street, :string
-    field :city, :string
+    field(:street, :string)
+    field(:city, :string)
   end
 
   def changeset(address, params) do
@@ -36,8 +36,10 @@ defmodule MyApp.User do
     user
     |> cast(params, [:name, :age])
     |> cast_embed(:address)
-    |> validate_number(:age, greater_than: 0,
-         message: "you are not yet born")
+    |> validate_number(:age,
+      greater_than: 0,
+      message: "you are not yet born"
+    )
   end
 end
 
@@ -59,4 +61,3 @@ _ = """
   City: <%= text_input fa, :city %> <%= error_tag fa, :city %>
 <% end %>
 """
-

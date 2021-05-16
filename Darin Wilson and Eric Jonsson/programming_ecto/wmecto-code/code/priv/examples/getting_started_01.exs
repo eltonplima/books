@@ -1,11 +1,11 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/wmecto for more book information.
-#---
+# ---
 alias MusicDB.{Repo, Artist}
 
 # insert a record into the artists table
@@ -22,4 +22,3 @@ dizzy = Repo.get_by(Artist, name: "John Birks Gillespie")
 
 # delete it
 Repo.delete(dizzy)
-

@@ -1,11 +1,11 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/wmecto for more book information.
-#---
+# ---
 _ = """
 config :music_db, MusicDB.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
@@ -31,4 +31,3 @@ defmodule MusicDB.AlbumTest do
     assert new_album.title == "Giant Steps"
   end
 end
-

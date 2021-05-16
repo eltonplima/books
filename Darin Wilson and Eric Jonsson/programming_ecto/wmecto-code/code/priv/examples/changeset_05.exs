@@ -1,17 +1,18 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/wmecto for more book information.
-#---
+# ---
 import ExUnit.Assertions
 
 import Ecto.Changeset
 alias MusicDB.Artist
 
 params = %{"name" => "Thelonius Monk", "birth_date" => "2117-10-10"}
+
 changeset =
   %Artist{}
   |> cast(params, [:name, :birth_date])
@@ -22,8 +23,9 @@ changeset =
       true -> [birth_date: "must be in the past"]
     end
   end)
+
 changeset.errors
-#=> [birth_date: {"must be in the past", []}]
+# => [birth_date: {"must be in the past", []}]
 
 assert [birth_date: {"must be in the past", []}] == changeset.errors
 
@@ -52,13 +54,13 @@ defmodule CustomValidations do
 
   def test_validation do
     params = %{"name" => "Thelonius Monk", "birth_date" => "2117-10-10"}
+
     changeset =
       %Artist{}
       |> cast(params, [:name, :birth_date])
       |> validate_required(:name)
       |> validate_in_the_past(:birth_date)
   end
-
 end
 
 changeset = CustomValidations.test_validation()

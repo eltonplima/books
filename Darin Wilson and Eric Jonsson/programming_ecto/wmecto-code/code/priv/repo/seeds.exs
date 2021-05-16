@@ -1,18 +1,18 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/wmecto for more book information.
-#---
+# ---
 alias MusicDB.Repo
 alias MusicDB.{Artist, Album, Track, Genre, AlbumWithEmbeds, ArtistEmbed, TrackEmbed}
 
-jazz_genre = Repo.insert!(%Genre{ name: "jazz", wiki_tag: "Jazz" })
-live_genre = Repo.insert!(%Genre{ name: "live", wiki_tag: "Concert" })
+jazz_genre = Repo.insert!(%Genre{name: "jazz", wiki_tag: "Jazz"})
+live_genre = Repo.insert!(%Genre{name: "live", wiki_tag: "Concert"})
 
-Repo.insert! %Artist{
+Repo.insert!(%Artist{
   name: "Miles Davis",
   albums: [
     %Album{
@@ -78,9 +78,9 @@ Repo.insert! %Artist{
       ]
     }
   ]
-}
+})
 
-Repo.insert! %Artist{
+Repo.insert!(%Artist{
   name: "Bill Evans",
   albums: [
     %Album{
@@ -191,9 +191,9 @@ Repo.insert! %Artist{
       ]
     }
   ]
-}
+})
 
-Repo.insert! %Artist{
+Repo.insert!(%Artist{
   name: "Bobby Hutcherson",
   albums: [
     %Album{
@@ -223,10 +223,10 @@ Repo.insert! %Artist{
       ]
     }
   ]
-}
+})
 
 if Repo.using_postgres?() do
-  Repo.insert! %AlbumWithEmbeds{
+  Repo.insert!(%AlbumWithEmbeds{
     title: "Moanin'",
     artist: %ArtistEmbed{
       name: "Art Blakey"
@@ -257,8 +257,8 @@ if Repo.using_postgres?() do
         duration: 349
       }
     ]
-  }
+  })
 end
 
-IO.puts ""
-IO.puts "Success! Sample data has been added."
+IO.puts("")
+IO.puts("Success! Sample data has been added.")
