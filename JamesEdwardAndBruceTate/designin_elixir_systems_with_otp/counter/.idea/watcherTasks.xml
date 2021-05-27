@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectTasksOptions">
+    <enabled-global>
+      <option value="mix format" />
+      <option value="mix format exs" />
+    </enabled-global>
+  </component>
+</project>
