@@ -39,4 +39,8 @@ defmodule Mastery.Core.Quiz do
     |> reset_template_cycle
   end
 
+  defp pick_current_question(quiz) do
+    Map.put(quiz, :current_question, select_a_random_question(quiz))
+  end
+
 end
