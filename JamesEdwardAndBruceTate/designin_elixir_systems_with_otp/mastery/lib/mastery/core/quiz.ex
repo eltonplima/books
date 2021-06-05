@@ -51,4 +51,10 @@ defmodule Mastery.Core.Quiz do
     |> Question.new()
   end
 
+  defp move_template(quiz, field) do
+    quiz
+    |> remove_template_from_category()
+    |> add_template_to_field(field)
+  end
+
 end
