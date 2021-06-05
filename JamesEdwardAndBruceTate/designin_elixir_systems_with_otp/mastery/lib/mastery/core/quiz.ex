@@ -43,4 +43,12 @@ defmodule Mastery.Core.Quiz do
     Map.put(quiz, :current_question, select_a_random_question(quiz))
   end
 
+  defp select_a_random_question(quiz) do
+    quiz.templates
+    |> Enum.random()
+    |> elem(1)
+    |> Enum.random()
+    |> Question.new()
+  end
+
 end
