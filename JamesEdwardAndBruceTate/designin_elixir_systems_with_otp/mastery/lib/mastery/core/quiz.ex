@@ -57,4 +57,6 @@ defmodule Mastery.Core.Quiz do
     |> add_template_to_field(field)
   end
 
+  defp template(quiz), do: quiz.current_question.template
+
 end
